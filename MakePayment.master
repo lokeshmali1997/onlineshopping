@@ -1,0 +1,459 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MakePayment.master.cs" Inherits="MakePayment" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" tagprefix="asp"  %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+     <title>KapdeWala.com</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+
+  <%--  <link href="bootstrap_link/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="bootstrap_link/bootstrap.js" type="text/javascript"></script>
+    <script src="bootstrap_link/jquery.js" type="text/javascript"></script> --%>
+
+ <%--   <link href="bootstrap_link/StyleSheet.css" rel="stylesheet" type="text/css" />--%>
+    <link href="css/home.css" rel="stylesheet" type="text/css" />
+    
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtsearch").focus(function () {
+            $(".sb").css({ "border": "1px solid ", "border-radius": "5px" });
+
+        });
+        $("#txtsearch").blur(function () {
+            $(".sb").css({ "border": "none" });
+
+
+        });
+
+    });
+    $(document).ready(function () {
+        $("#login").focus(function () {
+            $("#login").css({ "border-bottom": "2px solid #ff9801 ", "border-radius": "2px" });
+            $("#sign").css({ "border-bottom": "2px solid #fff ", "border-radius": "2px" });
+        });
+
+        $("#sign").focus(function () {
+            $("#login").css({ "border-bottom": "2px solid white ", "border-radius": "2px" });
+            $("#sign").css({ "border-bottom": "2px solid #ff9801 ", "border-radius": "2px" });
+
+        });
+
+
+    });
+
+  </script>
+  <style type="text/css">
+          .checkbox label, .radio label {padding-left:0px;}
+    
+.AutoCompleteFlyout
+{
+
+margin : 0px!important;
+background-color : #fff;
+color : windowtext;
+border : buttonshadow;
+border-width : 0px;
+border-style : solid;
+cursor : pointer;
+overflow : auto;
+height : auto;
+text-align : left;
+list-style-type:none;
+width:200px;
+ z-index:3000 !Important;
+}
+
+.AutoCompleteFlyoutItem
+{
+background-color :#fff;
+margin-left:-40px;
+padding : 2px;
+
+}
+
+.AutoCompleteFlyoutHilightedItem
+{
+
+background-color:#ddd;
+color: black;
+padding: 1px;
+margin-left:-40px;
+
+}
+
+.pay{ background:;}
+.pay>.col-sm-4>ul{ box-shadow:2px 2px 2px 2px #eee; margin-right:50px; padding:20px 50px 20px 50px;}
+.pay>.col-sm-4>ul>li{ margin-top:60px;}
+.pay>.col-sm-4>ul>li>a{color:#9e9eab; text-decoration:none;}
+.pay>.col-sm-4>ul>li>a:focus{color:#000;} 
+.pay>.col-sm-8{ box-shadow:2px 2px 2px 2px #eee;  margin-left:-20px;} 
+.imgcart{ margin:0px 0px 0px 0px; left:1300px; position:fixed; top:10px }
+  .cartspan{  color:White; height:18px;  position:fixed; top:30px; left:1316px; border-radius:50px; z-index:1035 }
+  </style>
+
+  <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+ 
+     <div class="container-fluid  "style="margin:0px 0px 0px 0px;">
+    <div class="row" style=" background:#FFF"><div class="col-sm-12" style="position:fixed; z-index:1036 ">
+    <div class="row " style=" position:fixed; z-index:1036; background:#fff" >
+      <div class="col-sm-4 " style="padding:20px 150px 0px 50px;">
+         <div class="input-group ">
+           <span class="input-group-addon sb" style="background-color:White; border-color:White"><i class="glyphicon glyphicon-search" style="background-color:White;"></i></span> 
+           <asp:TextBox ID="txtsearch" class="form-control sb" runat="server" placeholder="SEARCH" 
+                 style="border:none; box-shadow:none; color:#000;  border-color:Red; outline:none" 
+                 AutoPostBack="True" ontextchanged="txtsearch_TextChanged"></asp:TextBox>
+                       <asp:ToolkitScriptManager ID="ToolkitScriptManager2" runat="server">
+            <Services>
+                <asp:ServiceReference Path="~/WebService.asmx" />
+            </Services>
+        </asp:ToolkitScriptManager>
+
+        <asp:AutoCompleteExtender ID="txtGoingTo_AutoCompleteExtender" runat="server" 
+                            DelimiterCharacters="" Enabled="True" TargetControlID="txtsearch"
+                            ServicePath="~/WebService.asmx"
+                            ServiceMethod="GetCompletionList"
+                            CompletionInterval="100"
+                            MinimumPrefixLength="1"
+                            EnableCaching="true"
+                            CompletionSetCount="4"
+                            CompletionListItemCssClass="AutoCompleteFlyoutItem"
+                            CompletionListCssClass="AutoCompleteFlyout"
+                            CompletionListHighlightedItemCssClass="AutoCompleteFlyoutHilightedItem">
+                        </asp:AutoCompleteExtender>
+           
+           
+           </div>
+          </div>
+          <asp:Label ID="lblcartcount" class="cartspan"  runat="server" ></asp:Label></span>
+           <div class="col-sm-4 bg-success">
+      
+      </div>
+      <div class="imgcart">
+          <asp:ImageButton ID="btnImagecart" ImageUrl="img/cartt.png" runat="server" 
+              width="45px " height="45px" style="outline:none; cursor:pointer;"  onclick="btnImagecart_Click" /></div>
+      <div class="col-sm-4" style="position:fixed;  z-index: 1035; left:1330px; top:10px;" >
+      <ul>
+       <li ></li>
+       <li class="dropdownn" ><a href="#" class="dropbtnn" data-toggle="modal" data-target="#modallogin"><asp:Label ID="lblsignin" d runat="server" Text="SIGN IN"/></a>
+        <ul class="drop-content" >  
+         <li style=" background:#f9ab77;  border-radius:5px 5px 0px 0px; color:#fff; font-size:15px; font-family:Verdana">
+         <a href="#"  data-toggle="modal" data-target="#modallogin" style="color:#fff; font-family: Arial; font-size:14px; font-weight: 600; padding:20px; padding-right:5px" ><span style=" background:#fff; border:1px solid #fff; margin-right:10px; padding: 10px 5px 12px 9px;border-radius: 100%;">  
+             <img src="img/user-2-icon.png" width="20px" height="20px"> </span>Login/Regiser<span style=" "><img src="img/icons8-more-than-filled-50.png" width="20px" height="20px"  style=" margin-left:10px"/></span></a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-user-menu-male-50.png"  width="20px" height="20px" /></span> &nbsp; My Profile</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-edit-row-50.png"  width="20px" height="20px" /></span> &nbsp; My Order</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-assignment-return-50.png"  width="20px" height="20px" /></span> &nbsp; My Returns</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-comments-50.png"  width="20px" height="20px" /></span> &nbsp; My Feedback</a></li>
+         
+        </ul>
+       </li>
+      </ul>
+       <ul style=" margin:-40px 0px 0px 0px">
+       <li ></li>
+       <li class="dropdownn" ><a href="#" class="dropbtnn"><asp:Label ID="lblusernameshow" Visible="false" runat="server" Text="lokeshmali"/></a>
+        <ul class="drop-content" >  
+         <li style=" background:#f9ab77;  border-radius:5px 5px 0px 0px; color:#fff; font-size:15px; font-family:Verdana">
+         <a href="#" style="color:#fff; font-family: Arial; font-size:14px; font-weight: 600; padding:20px; padding-right:5px" ><span style=" background:#fff; border:1px solid #fff; margin-right:10px; padding: 10px 5px 12px 9px;border-radius: 100%;">  
+             <img src="img/user-2-icon.png" width="20px" height="20px"> </span>
+             <asp:Label ID="lblusernameshow2" runat="server" Text="Login/Regiser"/><span style=" "><img src="img/icons8-more-than-filled-50.png" width="20px" height="20px"  style=" margin-left:10px"/></span></a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-user-menu-male-50.png"  width="20px" height="20px" /></span> &nbsp; My Profile</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-edit-row-50.png"  width="20px" height="20px" /></span> &nbsp; My Order</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-assignment-return-50.png"  width="20px" height="20px" /></span> &nbsp; My Returns</a></li>
+         <li><a href="#" ><span style=" margin-left:10px"><img src="img/icons8-comments-50.png"  width="20px" height="20px" /></span> &nbsp; My Feedback</a></li>
+         <li><a href="#" ><span style=" margin-left:20px"><asp:LinkButton style=" margin-top:-25px; margin-left:0px;" ID="lbllogout"  Visible="false" runat="server"  onclick="lbllogout_Click"><img src="img/icons8-shutdown-51.png"  width="20px" height="20px" /></span> &nbsp;Logout</asp:LinkButton></a></li>
+        </ul>
+       </li>
+      </ul>
+    </div>
+    </div>
+    <div class="row" style="  background:#fff; position:fixed; z-index:1035; margin-top:50px; padding-left:600px;padding-right:530px"">
+     <div class="col-sm-12" style=""><h1 class="" style="color:Black;font-family:Century Gothic;font-size:45px; text-align:center;">Kapde<img  src="logoimg/kw.png" width="70px" height="70px" />Wala</h1></div>
+     
+    </div>
+
+    </div>    
+  
+
+  
+   
+ 
+  <div class="row" style="margin-top:150px;">
+   <div class="col-sm-12" style=" position:fixed; background:#fff;z-index: 1035; padding-top:20px;box-shadow: 0px 2px #eee">
+  <nav class="navbar navbar-default" >
+ 
+    <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bsmenu">
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+     <span class="icon-bar"></span>
+    </button>
+      
+    </div>
+    <div class="collapse navbar-collapse" id="bsmenu" style=" background:">
+        <ul class="nav navbar-nav">
+        <li class><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+
+        <li class="dropdown dropdown-large">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"> Shop <b class="caret"></b></a>
+                <ul class="dropdown-menu dropdown-menu-large row">
+                    <li class="col-sm-4">
+                        <ul>
+                            <li class="dropdown-header">Men's Clothing</li>
+                            <li><a href="T-Shirts.aspx">T-Shirts</a></li>
+                            <li><a href="#">Shirts </a></li>
+                            <li><a href="#">Suits</a></li>
+                             <li><a href="#">Jackets</a></li>
+                            <li class="divider"></li>
+                           <%--<li class="dropdown-header">Innerwear</li>
+                            <li><a href="#">Briefs</a></li>
+                             <li><a href="#">Vests</a></li> --%>
+                        </ul>
+                    </li>
+
+                    <li class="col-sm-4">
+                        <ul>
+                           <li class="dropdown-header">Bottom Wear</li>
+                            <li><a href="#">Jeans</a></li>
+                            <li><a href="#">Trouers</a></li>
+                            <li><a href="#">Track pants</a></li>
+                             <li><a href="#">Boxers</a></li>
+                              <li><a href="#">Cargos</a></li>
+                             <li class="divider"></li>
+                        </ul>
+                    </li>
+                    <li class="col-sm-4">
+                        <ul>
+                            <li class="dropdown-header">Innerwear</li>
+                            <li><a href="#">Briefs</a></li>
+                             <li><a href="#">Vests</a></li> 
+                             <li class="divider"></li>
+
+                        </ul>
+                    </li>
+
+                    
+                </ul>
+
+            </li>
+
+            
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+
+  
+  </div>
+
+</nav>
+</div>
+</div>
+</div>
+<div class="row pay" style="margin:100px 0px 0px 0px">
+<h3>Make Payment</h3>
+<div class="col-sm-4">
+ <ul>
+ <li ><a href="MCreditCard.aspx">Credit Card</a></li>
+ <li><a href="MDebitCard.aspx">Debit Card</a></li>
+ <li><a href="MNetBanking.aspx">Net Banking</a></li>
+ <li><a href="MCashOnD.aspx">Cash On Delivery</a></li>
+ </ul>
+</div>
+<div class="col-sm-8">
+ <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+</div>
+</div>
+
+
+       
+        <div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="modallogin" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="row" style=" padding:0px; margin:0px">
+    <div class="col-sm-4" style=" padding:0px; margin:0px">
+        <img src="images/homeimg/loginpageimg.jpg" width="300px" height="500px"/>
+    </div>
+    <div class="col-sm-8">
+    <ul class="nav nav-tabs">
+    <li ><a data-toggle="tab" href="#home" style=" border-bottom:2px solid #ff9801" class="active" id="login">Login</a></li>
+    <li id=""><a data-toggle="tab" href="#menu1" id="sign" >Sign Up</a></li>
+    <li style=" margin-left:350px; margin-top:10px;"><button type="button" style="outline:none;" class="close" data-dismiss="modal"><span style="font-size:35px; outline:none; font-weight:normal;">&times;</span></button></li>
+  <span style=" color:#fff; font-size:25px; position:fixed; right:370px; top:300px;">Login/Sign Up</br><span style=" margin-left:50px"> On </span></br><span style=" margin-left:10px" >KapdeWala</span></span>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <ul>
+      <li>
+          <asp:TextBox ID="txtusername" class="txtusername" runat="server" placeholder="Enter your mobile number or Email id"/></li>
+      <li></li>
+      <li>
+          <asp:TextBox ID="txtuserpassword" runat="server" class="txtuserpassword" placeholder="Enter your Password"/></li>
+      <li><a href="#">Forget Password</a></li>
+      <li>
+          <asp:Button ID="btnlogin" class="btnlogin" runat="server" Text="LOGIN" /></li>
+     <li> <span><a href="#" class="facebook">Facebook</a></span><span><a href="#" class="googleplus">Google +</a></span></li>
+     <li></li>
+     </ul>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <ul>
+       <li>
+          <asp:TextBox ID="TextBox3" class="txtusername" runat="server" placeholder="Enter your mobile number"/></li>
+
+      <li>
+          <asp:TextBox ID="TextBox1" class="txtusername" runat="server" placeholder="Enter your  Email id"/></li>
+      <li>
+          <asp:TextBox ID="TextBox2" runat="server" class="txtusername" placeholder="Enter your Password"/></li>
+      
+      <li>
+          <asp:Button ID="Button1" class="btnlogin" runat="server" Text="SIGN UP" /></li>
+     <li> <span><a href="#" class="facebook">Facebook</a></span><span><a href="#" class="googleplus">Google +</a></span></li>
+     <li></li>
+     </ul>
+
+    </div>
+    
+  </div>
+
+    <%--<div class="row">
+    <div class="col-sm-2"><a href="#">LogIn</a></div>
+    <div class="col-sm-8"><a href="#" data-toggle="modal" data-target="#modalsignup">SignUp</a></div>
+    <div class="col-sm-2"><button type="button" style="outline:none;" class="close" data-dismiss="modal"><span style="font-size:35px; outline:none; font-weight:normal;">&times;</span></button></div>
+    <span style=" color:#fff; font-size:25px; position:fixed; right:370px; top:300px;">Login/Sign Up</br><span style=" margin-left:50px"> On </span></br><span style=" margin-left:10px" >KapdeWala</span></span>
+    </div>
+    <div class="row row2">
+    <div class="col-sm-12">
+     <ul>
+      <li>
+          <asp:TextBox ID="txtusername" class="txtusername" runat="server" placeholder="Enter your mobile number or Email id"/></li>
+      <li></li>
+      <li>
+          <asp:TextBox ID="txtuserpassword" runat="server" class="txtuserpassword" placeholder="Enter your mobile number or Email id"/></li>
+      <li><a href="#">Forget Password</a></li>
+      <li>
+          <asp:Button ID="btnlogin" class="btnlogin" runat="server" Text="Button" /></li>
+     <li> <span><a href="#" class="facebook">Facebook</a></span><span><a href="#" class="googleplus">Google +</a></span></li>
+     <li></li>
+     </ul>
+    </div>
+    </div>--%>
+    </div>
+    
+    </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+
+        <div class="row Footer">
+     <div class="col-sm-3">
+      <h3>KAPDEWALA</h3>
+       <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Sign In</a></li>
+       </ul>
+     
+      </div>
+      <div class="col-sm-3">
+      <h3>SIGN IN</h3>
+       <ul>
+        <li><a href="#">My Account</a></li>
+        <li><a href="#">My Order</a></li>
+        <li><a href="#">My Return</a></li>
+        <li><a href="#">My Feedback</a></li>
+        
+       </ul>
+     
+      </div>
+      <div class="col-sm-3">
+      <h3>Top Categories</h3>
+       <ul>
+        <li>Men's Clothing</li>
+                            <li><a href="#">T-Shirts</a></li>
+                            <li><a href="#">Shirts </a></li>
+                            <li><a href="#">Suits</a></li>
+                             <li><a href="#">Jackets</a></li>
+                            <li class="divider"></li>
+        
+       </ul>
+     
+      </div>
+      <div class="col-sm-3">
+      <h3>Customer Service</h3>
+       <ul>
+        <li><span>Call : </span><a href="#">+91 99 830 444 87</a></li>
+        <li><span>Email : </span><a href="#">hepl@kapdewala.com</a></li>
+        
+        
+       </ul>
+     
+      </div>
+      </div>
+       <div class="row Footer-Second">
+       <div class="col-sm-4">
+        <h4> <span><img src="images/footer/rupee-icons.png" width="50" height="50" /></span>CASH ON DELIVERY</h4>
+       </div>
+       <div class="col-sm-4">
+       <h4> <span><img src="images/footer/return-icon.png" width="60" height="60 " /></span>15 days return</h4>
+       </div>
+       <div class="col-sm-4">
+       <h4 style=" margin-top:15px"> <span><img src="images/footer/shipping-icon.png" width="40" height="40" /></span> free shipping*</h4>
+       </div>
+       
+       </div>
+
+       <div class="row Footer-Third" style="margin:30px 0px 10px 0px;">
+        <div class="col-sm-4">
+         <h5 style="color:#344c55;font-size:14px;font-family:font-blod;margin-left:40px;text-transform:uppercase;">PAYMENT</h5>
+            <img src="images/footer/visa-master.png" width="90" height="30" style="margin-left:40px"/>
+            <img src="images/footer/diners-culb.png" width="60" height="40"/>
+            <img src="images/footer/rupay.png"  width="60" height="40"/>
+            <img src="images/footer/netbanking.png" width="60" height="60"/>
+        </div>
+        <div class="col-sm-4">
+           <h5 style="margin-top:60px; text-align:center"><a href="#">&copy; 2017 kapdewala.com</a></h5>
+        </div>
+        <div class="col-sm-4">
+        <ul style="margin-top:50px;">
+          <li style=" color:#777;font-size:15px;font-family:Verdana;">Keep In Touch</li>
+          <li><a href="#"><img src="images/footer/facebook.png" /></a></li>
+          <li><a href="#"><img src="images/footer/twitter.png" /></a></li>
+          <li><a href="#"><img src="images/footer/google-plus.png" /></a></li>
+          <li><a href="#"><img src="images/footer/youtube.png" /></a></li>
+          <li><a href="#"><img src="images/footer/instagram.png" /></a></li>
+        </ul>
+
+        </div>
+        
+       </div>
+    
+   <!--Footer Div-->
+   </div>    
+    </form>
+</body>
+</html>
