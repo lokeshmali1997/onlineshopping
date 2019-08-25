@@ -1,0 +1,76 @@
+﻿
+
+
+
+.container{margin-top:60px}
+.bttn{ background-color:White; text-decoration:none}
+  #TextBox1::placeholder {color: #000;}
+  
+  .cart-count:before {
+    font-family: 'Pacific';
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 33px;
+    -webkit-font-smoothing: antialiased;
+    content: '\E003';
+    display: inline-block;
+    vertical-align: bottom;
+  }
+   
+  
+ /* cart code */ 
+  
+  .cd-cart {
+  position: absolute;
+  z-index: 2;
+  top: 400px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  
+}
+
+img, svg {
+  max-width: 100%;
+
+}
+.cd-cart span {
+  /* number of items added to the cart */
+  position: absolute;
+  top: 11px;
+  right: 9px;
+  height: 12px;
+  width: 12px;
+  line-height: 18px;
+  background-color:;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 50%;
+  /* scale it down if no products have been added to the cart */
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: -webkit-transform 0.2s 0s;
+  -moz-transition: -moz-transform 0.2s 0s;
+  transition: transform 0.2s 0s;
+}
+.cd-cart.items-added span {
+  /* counter visible when a product is added to the cart */
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+@media only screen and (min-width: 1100px) {
+  .cd-cart {
+    position:fixed ;
+    top: 43px;
+    right: 200px;
+  }
+  /*end*/
+}

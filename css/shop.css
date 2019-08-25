@@ -1,0 +1,60 @@
+﻿body {
+}
+
+
+.left-side{margin-left:30px}
+.left-side > .row > ul{ list-style-type:none;}
+.left-side > .row > ul > li{margin-top:10px; color:Black;}
+.left-side > .row > ul > li > a{color:Black;} 
+
+.repeaterul{ list-style-type:none;}
+.repeaterul>li{list-style-type:none; margin-top:5px}
+
+.lblproductname
+{
+    color: #666;
+    font-family:Verdana;
+    line-height: 20px;
+    font-size: 13px;
+    
+    
+    }
+    .lblproductname:hover
+{text-decoration:none;}
+.lblproductbrand
+{
+    color:#777
+    }
+    .Label1:hover{ text-decoration:none}
+    .lblproductprice:hover{ text-decoration:none}
+    .lblproductprice{  font-size: 20px;
+    line-height: 20px;
+    color: #333;
+    margin-right:10px;
+    margin-left:2px;
+    font-family: "font-bold";
+    height: 20px;}
+    
+    .productimg{ margin-left:50px; outline:none;}
+    
+    
+    
+.sortbyddl{padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    line-height: 1;
+    height:34px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+     border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      margin-left:980px;
+      
+    }
+.input-group-addon{
+        background:#fff}
+        
+        .lbldatanotfound{ position:relative; top:100px; left:500px; color:gray; font-size:25px; font-family:Arial; }
+        .btndatanotfound{ position:relative; top:100px; left:500px; color:blue; outline:none; background:#fff; border:none; font-size:15px;  font-family:Arial; }
